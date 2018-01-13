@@ -1,0 +1,26 @@
+header {
+    background-color: $body-bg;
+    width: 100%;
+    height: 56px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 20px;
+    font-size: 20px;
+    vertical-align: middle;
+    line-height: 50px;
+    text-align: center;
+    font-weight: bold;
+    z-index: 2;
+    @include ellipsis;
+
+    i {
+        font-size: 26px;
+        float: left;
+    }
+
+    &::after {
+        content: "";
+        clear: both;
+    }
+}

@@ -1,0 +1,126 @@
+
+.home-page {
+    width: 100%;
+    padding: 0 10px;
+
+
+    .current-month {
+        height: 30px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        width: 220px;
+        margin: 0 auto;
+        margin-top: 20px;
+
+        .month {
+            font-weight: bold;
+            line-height: 20px;
+            font-size: 18px;
+            width: 150px;
+            text-transform: uppercase;
+        }
+
+        .month-nav {
+            i {
+                font-size: 30px;
+                cursor: pointer;
+            }
+
+            &.nav-left {
+                padding-right: 15px;
+            }
+            &.nav-right {
+                padding-left: 15px;
+            }
+        }
+    }
+
+    .charts {
+        margin-top: 10px;
+    }
+
+    .categories {
+        h4 {
+            margin: 0;
+            line-height: 30px;
+            vertical-align: middle;
+            font-size: 16px;
+
+            ._dot {
+                margin-top: 10px;
+            }
+
+            &.bold { font-weight: bold }
+        }
+    }
+
+    .moneys {
+        text-align: center;
+        margin-top: 10px;
+
+        h5 {
+            color: $color-teal;
+            font-weight: bold;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        h4 {
+            font-size: 16px;
+            font-weight: bold;
+
+            &.red {color: red}
+            &.green {color: $color-green}
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: bold;
+            color: $color-primary;
+        }
+    },
+
+    .entries {
+        font-size: 15px;
+
+        .entry {
+            cursor: pointer;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 16px;
+
+            .category {
+                font-weight: 600;
+            }
+
+            .sub {
+                color: $color-teal;
+                font-weight: bold;
+                font-size: 16px;
+            }
+
+            .date {
+                font-size: 15px;
+            }
+
+            .expanded {
+                background: #e1e1e1;
+                width: 100%;
+                padding: 10px;
+            }
+
+            .amount {
+                font-weight: 600;
+                color: $color-greener;
+                text-align: right;
+                font-family: Gudea, sans-serif;
+                font-size: 15px;
+            }
+
+            &.expense {
+                .amount { color: $color-red }
+            }
+        }
+    }
+
+}

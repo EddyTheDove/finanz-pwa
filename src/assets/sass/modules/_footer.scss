@@ -1,0 +1,44 @@
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    height: 50px;
+    box-shadow: 0px 0px 40px rgba(0,0,0,0.1);
+
+    ._footer-container {
+        position: relative;
+        width: 100%;
+    }
+
+    ._footer-buttons {
+        width: 100%;
+        display: flex;
+
+        ._footer-button {
+            width: 50%;
+            height: 50px;
+            text-align: center;
+            vertical-align: middle;
+            font-family: 'Source Sans Pro';
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 46px;
+
+
+            &.first {
+                border-right: 1px solid #eee;
+            }
+            &.red {
+                i { color: $color-red }
+            }
+            &.green {
+                i { color: $color-greener }
+            }
+
+            i { font-size: 23px; margin-right: 5px }
+        }
+    }
+}
