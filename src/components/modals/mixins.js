@@ -14,9 +14,15 @@ export default {
             disableMobile: true,
             maxDate: 'today'
         },
-        categories: [],
-        subs: []
+        subs: [],
+        isLoading: false
     }),
+
+    computed: {
+        categories () {
+            return this.$store.state.category.categories
+        }
+    },
 
     methods: {
         open () {
@@ -25,6 +31,20 @@ export default {
 
         close () {
             this.isOpen = false
+        },
+
+        async save () {
+            this.isLoading = true
+            try {
+                await this.$api.post('/entries', this.ghost)
+                this.$store.dispatch('user/getUser')
+                this.$store.dispatch('entry/getEntries')
+                this.showMessage()
+            } catch (error) {
+                const message = error.response.data.message
+                this.$alert.error(message)
+            }
+            this.isLoading = false
         }
     }
 }

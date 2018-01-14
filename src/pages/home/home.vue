@@ -5,7 +5,7 @@
         <div class="moneys">
             <div class="row">
                 <div class="col-xs-4">
-                    <div class="medium">
+                    <div class="medium text-right">
                         <h4 class="green">{{ income | currency }}</h4>
                         <h4 class="red">-{{ expenses | currency }}</h4>
                     </div>
@@ -42,67 +42,47 @@ export default {
     data () {
         return {
             pie: {},
-            income: 92000.00,
-            expenses: 87456.45,
-            entries: []
+            isLoading: false
         }
     },
 
     mounted () {
-        this.getEntries()
+        this.loadEntries()
     },
 
     computed: {
+        user () {
+            return this.$store.state.user.user
+        },
+
+        income () {
+            return this.user.income || 0
+        },
+
+        expenses () {
+            return this.user.expenses || 0
+        },
+
         total () {
             return this.income - this.expenses
+        },
+
+        entries () {
+            return this.$store.state.entry.entries
         }
     },
 
     methods: {
-        getEntries () {
-            this.entries = [
-                {
-                    id: 1,
-                    description: "Mama's deposit",
-                    type: 'income',
-                    amount: 3000.00,
-                    date: '23/12/2017'
-                },
-                {
-                    id: 2,
-                    category: 'Car',
-                    sub: 'Fuel',
-                    description: 'Fuel to Camden',
-                    amount: 44.29,
-                    type: 'expense',
-                    date: '19/12/2017'
-                },
-                {
-                    id: 3,
-                    category: 'House',
-                    sub: 'Internet',
-                    description: 'November bill that I found money in the street in Central Park when coming back from the lecture',
-                    amount: 44.29,
-                    type: 'expense',
-                    date: '13/12/2017'
-                },
-                {
-                    id: 4,
-                    description: "Eddy's Food",
-                    type: 'income',
-                    amount: 99.99,
-                    date: '11/12/2017'
-                },
-                {
-                    id: 5,
-                    category: 'House',
-                    sub: 'Food',
-                    description: 'Uber Eats',
-                    amount: 29.40,
-                    type: 'expense',
-                    date: '11/12/2017'
-                }
-            ]
+        async loadEntries () {
+            this.isLoading = true
+
+            try {
+                await this.$store.dispatch('entry/getEntries')
+            } catch (error) {
+                console.log('Error', error)
+            }
+
+            this.isLoading = false
         }
     }
 }

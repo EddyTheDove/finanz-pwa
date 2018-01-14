@@ -6,8 +6,9 @@ import Guard from '@/services/middleware'
 import Home from '../pages/home/home'
 import Monthly from '../pages/monthly/monthly'
 import Account from '../pages/account/account'
-import Login from '../pages/auth/login'
+import Login from '@/pages/auth/login'
 import Register from '@/pages/auth/register'
+import Categories from '@/pages/categories/categories'
 
 Vue.use(Router)
 
@@ -18,6 +19,7 @@ export default new Router({
         { path: '/login', name: 'login', component: Login, beforeEnter: Guard.guest },
         { path: '/register', name: 'register', component: Register, beforeEnter: Guard.guest },
         { path: '/monthly', name: 'monthly', component: Monthly, beforeEnter: Guard.auth },
+        { path: '/categories', name: 'categories', component: Categories, beforeEnter: Guard.auth },
         { path: '/account', name: 'account', component: Account, beforeEnter: Guard.auth }
     ]
 })

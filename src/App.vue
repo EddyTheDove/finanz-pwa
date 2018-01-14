@@ -1,6 +1,7 @@
 <template>
     <div id="app">
         <section>
+            <Alert></Alert>
             <Sidebar></Sidebar>
 
             <transition
@@ -17,8 +18,25 @@
 </template>
 
 <script>
+import env from '../env'
+import Alert from '@/components/alert/alert'
+
 export default {
-    name: 'app'
+    name: 'app',
+    components: { Alert },
+
+    computed: {
+        token () {
+            return localStorage.getItem(env.TOKEN)
+        }
+    },
+
+    mounted () {
+        if (this.token) {
+            this.$store.dispatch('user/getUser')
+            this.$store.dispatch('category/getCategories')
+        }
+    }
 }
 </script>
 

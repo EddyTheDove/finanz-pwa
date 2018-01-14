@@ -1,0 +1,22 @@
+
+.categories-page {
+    margin-top: 30px;
+    padding: 0 10px;
+}
+
+._categories {
+    h4 {
+        margin: 0;
+        line-height: 30px;
+        vertical-align: middle;
+        font-size: 16px;
+        font-weight: bold;
+
+        ._dot {
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+
+        &.bold { font-weight: bold }
+    }
+}

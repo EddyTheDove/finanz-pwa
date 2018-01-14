@@ -1,0 +1,43 @@
+._alert {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 60px;
+    height: auto;
+    z-index: 6;
+    padding: 10px;
+    background-color: transparent;
+    transform: translateX(100%);
+    transition: 0.3s;
+
+    ._alert-container {
+        padding: 14px 0;
+        font-weight: bold;
+        text-align: center;
+        font-size: 16px;
+        border: none;
+        border-radius: 2px;
+
+        &.error {
+            background-color: $color-red;
+            color: white;
+        }
+
+        &.success {
+            background-color: $color-greener;
+            color: white;
+        }
+
+        &.info {
+            background-color: $color-primary;
+            color: white;
+        }
+    }
+
+
+
+    &.isOpen {
+        transform: translateX(0%);
+    }
+}

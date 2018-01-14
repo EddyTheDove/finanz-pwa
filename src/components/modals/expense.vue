@@ -14,7 +14,7 @@
 
 
             <div class="_modal-body">
-                <form class="_form" @submit.prevent>
+                <form class="_form" @submit.prevent="validate()">
 
                     <flat-pickr
                         v-model="ghost.date"
@@ -27,7 +27,7 @@
                             <div class="_form-group">
                                 <select class="_form-select" v-model="ghost.category">
                                     <option value="">Category</option>
-                                    <option v-for="c in categories" :value="c.id">{{ c.name }}</option>
+                                    <option v-for="c in categories" :value="c._id">{{ c.name }}</option>
                                 </select>
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                             <div class="_form-group">
                                 <select class="_form-select" v-model="ghost.sub">
                                     <option value="">Sub Category</option>
-                                    <option v-for="c in subs" :value="c.id">{{ c.name }}</option>
+                                    <option v-for="c in subs" :value="c._id">{{ c.name }}</option>
                                 </select>
                             </div>
                         </div>
@@ -47,7 +47,11 @@
                         <input type="number" step="0.01"
                             class="_form-input"
                             placeholder="Amount"
+                            name="amount"
+                            required
+                            v-validate="'required'"
                             v-model="ghost.amount">
+                        <span class="_form-error" v-show="errors.has('amount')">{{ errors.first('amount') }}</span>
                     </div>
 
                     <div class="_form-group mt-20">
@@ -58,9 +62,11 @@
                             v-model="ghost.description"></textarea>
                     </div>
 
-                    <div class="mt-40 text-center">
-                        <button type="submit" class="btn btn-lg btn-info elevated round">
-                            Save Expense
+                    <div class="mt-30 text-right">
+                        <button class="btn btn-info btn-lg elevated w-150 bold"
+                            :disabled="isLoading">
+                            <span v-show="!isLoading">Save Expense</span>
+                            <span v-show="isLoading">Saving...</span>
                         </button>
                     </div>
                 </form>
@@ -79,7 +85,6 @@ export default {
     mounted () {
         window.eventBus.$on('expenseModal:open', () => this.open())
         window.eventBus.$on('expenseModal:close', () => this.close())
-        this.getCategories()
     },
 
     watch: {
@@ -90,7 +95,7 @@ export default {
                 this.subs = []
             } else {
                 this.categories.forEach(c => {
-                    if (this.ghost.category === c.id) {
+                    if (this.ghost.category === c._id) {
                         this.subs = c.subs
                     }
                 })
@@ -99,27 +104,17 @@ export default {
     },
 
     methods: {
-        getCategories () {
-            this.categories = [
-                {
-                    id: 1,
-                    name: 'Car',
-                    subs: [
-                        { id: 2, name: 'Fuel' },
-                        { id: 3, name: 'Insurance' },
-                        { id: 4, name: 'Wash' }
-                    ]
-                },
+        validate () {
+            if (this.ghost.category === '') {
+                this.$alert.error('Please select a category')
+                return
+            }
+            this.ghost.type = 'expense'
+            this.save()
+        },
 
-                {
-                    id: 2,
-                    name: 'Bills',
-                    subs: [
-                        { id: 5, name: 'Rent' },
-                        { id: 6, name: 'Electricity' }
-                    ]
-                }
-            ]
+        showMessage () {
+            this.$alert.success('Expense successfully saved')
         }
     }
 }

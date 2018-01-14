@@ -59,6 +59,12 @@ export default {
     mounted () {
         window.eventBus.$on('incomeModal:open', () => this.open())
         window.eventBus.$on('incomeModal:close', () => this.close())
+    },
+
+    methods: {
+        showMessage () {
+            this.$alert.success('Income successfully saved')
+        }
     }
 }
 </script>

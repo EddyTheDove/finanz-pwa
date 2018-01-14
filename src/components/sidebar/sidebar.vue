@@ -10,7 +10,7 @@
             </li>
 
             <hr>
-            
+
             <li>
                 <a @click="signout">Sign Out</a>
             </li>
@@ -29,6 +29,7 @@ export default {
         menu: [
             { label: 'Home', name: 'home', url: '/' },
             { label: 'Monthly Report', name: 'monthly', url: '/monthly' },
+            { label: 'Categories', name: 'categories', url: '/categories' },
             { label: 'My Account', name: 'account', url: '/account' }
         ]
     }),

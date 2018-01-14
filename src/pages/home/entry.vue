@@ -3,7 +3,7 @@
         <div class="_block-container">
             <div class="row">
                 <div class="col-xs-8">
-                    <div class="category" v-if="hasCategory">{{ entry.category }}</div>
+                    <div class="category" v-if="hasCategory">{{ entry.category.name }}</div>
                     <div class="description" v-if="!hasCategory">{{ entry.description }}</div>
                     <div class="date">{{ date }}</div>
 
@@ -18,7 +18,7 @@
         </div>
 
         <div class="expanded" v-show="expanded">
-            <div class="sub">{{ entry.sub }}</div>
+            <div class="sub" v-if="suber">{{ suber.name }}</div>
             <div class="description">{{ entry.description }}</div>
         </div>
     </div>
@@ -42,12 +42,16 @@ export default {
             return this.entry.category
         },
 
+        suber () {
+            return this.entry.sub
+        },
+
         isExpense () {
             return this.entry.type === 'expense'
         },
 
         date () {
-            let d = moment(this.entry.date, 'DD/MM/YYYY')
+            let d = moment(this.entry.date)
             return d.format('DD MMM YYYY')
         }
     },

@@ -16,15 +16,17 @@ import expenseModal from './components/modals/expense'
 
 // Plugins
 import api from './plugins/api'
-import toastr from './plugins/toastr'
 import helpr from './plugins/helpr'
+import alert from './plugins/alert'
 
 window.$ = window.jQuery = require('jquery')
-window.moment = require('moment')// import filters globally
+window.moment = require('moment')
+
+// import filters globally
 require('./filters')
 
 Vue.use(VeeValidate)
-Vue.use(toastr)
+Vue.use(alert)
 Vue.use(helpr)
 Vue.use(api)
 
