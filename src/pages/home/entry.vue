@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-xs-8">
                     <div class="category" v-if="hasCategory">{{ entry.category.name }}</div>
-                    <div class="description" v-if="!hasCategory">{{ entry.description }}</div>
+                    <div class="description bold" v-if="!hasCategory">{{ entry.description }}</div>
                     <div class="date">{{ date }}</div>
 
                 </div>

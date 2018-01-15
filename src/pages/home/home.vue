@@ -25,8 +25,13 @@
             <Entry v-for="e in entries" :entry="e" :key="e.id"></Entry>
         </div>
 
-        <div class="mt-40 text-center">
-            <button  class="btn btn-info btn-lg elevated w-200">Load More</button>
+        <div class="mt-40 text-center" v-show="nextPage">
+            <button
+                :disabled="isLoading"
+                class="btn btn-info btn-lg elevated w-200 bold"
+                @click="loadMore()">
+                Load More
+            </button>
         </div>
 
         <Footer></Footer>
@@ -69,6 +74,10 @@ export default {
 
         entries () {
             return this.$store.state.entry.entries
+        },
+
+        nextPage () {
+            return this.$store.state.entry.nextPage
         }
     },
 
@@ -83,6 +92,27 @@ export default {
             }
 
             this.isLoading = false
+        },
+
+        async loadMore () {
+            if (!this.isLoading) {
+                this.isLoading = true
+
+                try {
+                    const response = await this.$api.any({
+                        method: 'get',
+                        url: this.nextPage
+                    })
+
+                    let entries = this.entries.slice()
+                    entries.push.apply(entries, response.data.data)
+                    this.$store.commit('entry/SET_ENTRIES', entries)
+                    this.$store.commit('entry/SET_NEXT_PAGE', response.data.next_page)
+                } catch (error) {
+                    console.log('Error', error)
+                }
+                this.isLoading = false
+            }
         }
     }
 }

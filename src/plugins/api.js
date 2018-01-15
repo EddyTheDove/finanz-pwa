@@ -40,6 +40,10 @@ export default {
 
             clearToken () {
                 axios.defaults.headers.common['Authorization'] = ''
+            },
+
+            any ({ method, url, data } = {}) {
+                return axios({ method, url, data })
             }
         }
     }

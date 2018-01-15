@@ -60,12 +60,11 @@
                             <i class="glyphicon ion-android-textsms"></i>
                             <input type="text"
                                 class="_form-material bold"
-                                placeholder="Description *"
+                                placeholder="Description"
                                 name="description"
                                 v-validate="'required'"
                                 v-model="ghost.description">
                         </div>
-                        <span class="_form-error" v-show="errors.has('description')">{{ errors.first('description') }} <br></span>
                     </div>
 
                     <div class="mt-30 text-right">
