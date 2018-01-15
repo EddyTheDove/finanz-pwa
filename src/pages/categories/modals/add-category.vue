@@ -68,6 +68,7 @@ export default {
     }),
 
     mounted () {
+        this.category.colour = '#1abc9c'
         window.eventBus.$on('newCategoryModal:open', () => this.open())
         window.eventBus.$on('newCategoryModal:close', () => this.close())
     },
