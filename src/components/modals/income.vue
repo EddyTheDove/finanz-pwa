@@ -61,11 +61,12 @@
 </template>
 
 <script>
+import modalsMixins from '@/mixins/modal'
 import modalMixins from './mixins'
 
 export default {
     name: 'incomeModal',
-    mixins: [modalMixins],
+    mixins: [modalsMixins, modalMixins],
 
     mounted () {
         window.eventBus.$on('incomeModal:open', () => this.open())

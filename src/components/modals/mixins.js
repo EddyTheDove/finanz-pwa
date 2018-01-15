@@ -3,7 +3,6 @@ import tz from 'moment-timezone'
 
 export default {
     data: () => ({
-        isOpen: false,
         ghost: {
             date: window.moment().tz(window.timezone).format('YYYY-MM-DD'),
             category: '',
@@ -17,8 +16,7 @@ export default {
             disableMobile: true,
             maxDate: 'today'
         },
-        subs: [],
-        isLoading: false
+        subs: []
     }),
 
     computed: {
@@ -28,14 +26,6 @@ export default {
     },
 
     methods: {
-        open () {
-            this.isOpen = true
-        },
-
-        close () {
-            this.isOpen = false
-        },
-
         async save () {
             this.isLoading = true
             try {

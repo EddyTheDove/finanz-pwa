@@ -2,7 +2,7 @@
     <div class="page has-menu has-footer">
         <Menu>
             Categories
-            <span class="pull-right">
+            <span class="pull-right" @click="add()">
                 <i class="ion-plus"></i>
             </span>
         </Menu>
@@ -14,25 +14,33 @@
                         <h4>
                             <div class="_dot" :style="'background-color:' + c.colour"></div>
                             {{ c.name }}
-                            <!-- <span class="bold pull-right">{{ c.amount | currency }}</span> -->
                         </h4>
                     </div>
                 </div>
             </div>
         </div>
 
-
+        <addCategory></addCategory>
         <Footer></Footer>
     </div>
 </template>
 
 <script>
+import addCategory from './modals/add-category'
+
 export default {
     name: 'categories',
+    components: { addCategory },
 
     computed: {
         categories () {
             return this.$store.state.category.categories
+        }
+    },
+
+    methods: {
+        add () {
+            window.eventBus.$emit('newCategoryModal:open')
         }
     }
 }
