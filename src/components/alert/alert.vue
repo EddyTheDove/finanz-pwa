@@ -1,6 +1,7 @@
 <template lang="html">
     <div class="_alert" :class="[{ isOpen: isOpen }]" @click="close()">
         <div class="_alert-container" :class="type">
+            <span class="_close"><i class="ion-close"></i></span>
             {{ message }}
         </div>
     </div>

@@ -19,6 +19,12 @@
         border: none;
         border-radius: 2px;
 
+        ._close {
+            float:right;
+            padding-right:10px;
+            color: white;
+        }
+
         &.error {
             background-color: $color-red;
             color: white;

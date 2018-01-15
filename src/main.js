@@ -7,6 +7,9 @@ import store from './store'
 import VueFlatpickr from 'vue-flatpickr-component'
 import VeeValidate from 'vee-validate'
 
+// eslint-disable-next-line
+import tz from 'moment-timezone'
+
 // Global components
 import Menu from './components/menu/menu'
 import Footer from './components/footer/footer'
@@ -21,6 +24,7 @@ import alert from './plugins/alert'
 
 window.$ = window.jQuery = require('jquery')
 window.moment = require('moment')
+window.timezone = window.moment.tz.guess()
 
 // import filters globally
 require('./filters')

@@ -1,8 +1,11 @@
+// eslint-disable-next-line
+import tz from 'moment-timezone'
+
 export default {
     data: () => ({
         isOpen: false,
         ghost: {
-            date: window.moment().format('YYYY-MM-DD'),
+            date: window.moment().tz(window.timezone).format('YYYY-MM-DD'),
             category: '',
             sub: ''
         },

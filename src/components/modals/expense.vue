@@ -42,24 +42,30 @@
                         </div>
                     </div>
 
-                    <div class="_form-group mt-10">
-                        <label for="amount">Amount</label>
-                        <input type="number" step="0.01"
-                            class="_form-input"
-                            placeholder="Amount"
-                            name="amount"
-                            required
-                            v-validate="'required'"
-                            v-model="ghost.amount">
-                        <span class="_form-error" v-show="errors.has('amount')">{{ errors.first('amount') }}</span>
+                    <div class="_form-group mt-20">
+                        <div class="inner-addon left-addon">
+                            <i class="glyphicon ion-cash"></i>
+                            <input type="number" step="0.01"
+                                class="_form-material bold"
+                                placeholder="Amount *"
+                                name="amount"
+                                v-validate="'required'"
+                                v-model="ghost.amount">
+                        </div>
+                        <span class="_form-error" v-show="errors.has('amount')">{{ errors.first('amount') }} <br></span>
                     </div>
 
-                    <div class="_form-group mt-20">
-                        <label for="description">Description</label>
-                        <textarea rows="2"
-                            class="_form-text"
-                            placeholder="Description"
-                            v-model="ghost.description"></textarea>
+                    <div class="_form-group mt-40">
+                        <div class="inner-addon left-addon">
+                            <i class="glyphicon ion-android-textsms"></i>
+                            <input type="text"
+                                class="_form-material bold"
+                                placeholder="Description *"
+                                name="description"
+                                v-validate="'required'"
+                                v-model="ghost.description">
+                        </div>
+                        <span class="_form-error" v-show="errors.has('description')">{{ errors.first('description') }} <br></span>
                     </div>
 
                     <div class="mt-30 text-right">

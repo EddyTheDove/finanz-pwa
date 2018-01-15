@@ -26,7 +26,7 @@
                                 <i class="glyphicon ion-android-person"></i>
                                 <input type="text"
                                     class="_form-material bold"
-                                    placeholder="First name"
+                                    placeholder="Preferred name"
                                     v-model="ghost.firstname">
                             </div>
                         </div>

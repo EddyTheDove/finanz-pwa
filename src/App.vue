@@ -7,7 +7,7 @@
             <transition
                 :duration="100"
                 name="custom-classes-transition"
-                enter-active-class="animated fadeIn">
+                enter-active-class="animated">
                 <router-view></router-view>
             </transition>
 
