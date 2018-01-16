@@ -28,7 +28,7 @@
 
                     <div class="colours">
                         <label @click="showColours = !showColours">
-                            <span class="_dot" :style="'margin-top:5px; background-color:' + category.colour"></span>
+                            <span class="_dot" :style="'margin-top:5px; background-color:' + colour"></span>
                             Set Colour
                             <i class="ion-arrow-down-b"></i>
                         </label>
@@ -37,7 +37,7 @@
                             <li v-for="c in colours"
                                 @click="selectColour(c)"
                                 :style="'background-color:' + c">
-                                <i class="ion-checkmark" v-if="c == category.colour"></i>
+                                <i class="ion-checkmark" v-show="colour == c"></i>
                             </li>
                         </ul>
                         <div class="clearfix"></div>
@@ -64,11 +64,11 @@ export default {
     mixins: [modalMixins, coloursMixins],
 
     data: () => ({
-        category: {}
+        category: {},
+        colour: '#1abc9c'
     }),
 
     mounted () {
-        this.category.colour = '#1abc9c'
         window.eventBus.$on('newCategoryModal:open', () => this.open())
         window.eventBus.$on('newCategoryModal:close', () => this.close())
     },
@@ -76,8 +76,8 @@ export default {
     methods: {
         selectColour (c) {
             console.log('setting colour', c)
-            this.category.colour = c
-            console.log('category', this.category)
+            this.colour = c
+            console.log('category', this.colour)
         },
 
         validate () {
