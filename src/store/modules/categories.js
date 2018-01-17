@@ -21,6 +21,15 @@ export default {
             } catch (error) {
                 console.log('Error', error)
             }
+        },
+
+        async addCategory ({ dispatch }, payload) {
+            try {
+                await ApiService.post('/categories', payload)
+                dispatch('getCategories')
+            } catch (error) {
+                console.log('Error', error)
+            }
         }
     }
 }

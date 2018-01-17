@@ -32,6 +32,14 @@ export default {
     name: 'categories',
     components: { addCategory },
 
+    data: () => ({
+        category: {},
+        isLoading: false,
+        showColours: false,
+        colour: '#1abc9c',
+        colours: []
+    }),
+
     computed: {
         categories () {
             return this.$store.state.category.categories
@@ -41,6 +49,14 @@ export default {
     methods: {
         add () {
             window.eventBus.$emit('newCategoryModal:open')
+        },
+
+        validate () {
+            console.log('trying to add category')
+        },
+
+        selectColour (c) {
+            this.colour = c
         }
     }
 }

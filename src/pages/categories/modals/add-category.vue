@@ -14,7 +14,7 @@
 
 
             <div class="_modal-body">
-                <form class="_form" @submit.prevent="validate()">
+                <form class="_form" @submit.prevent>
 
                     <div class="_form-group mt-20">
                         <input type="text"
@@ -22,6 +22,7 @@
                             placeholder="Category name"
                             name="name"
                             v-validate="'required'"
+                            autocomplete="off"
                             v-model="category.name">
                         <span class="_form-error" v-show="errors.has('name')">{{ errors.first('name') }} <br></span>
                     </div>
@@ -44,9 +45,19 @@
                     </div>
 
 
+                    <subsComponent
+                        @added="pushSub"
+                        @removed="removeSub"
+                        :subcategories="subcategories">
+                    </subsComponent>
+
+
                     <div class="mt-40 text-center">
-                        <button type="submit" class="btn btn-lg btn-info elevated w-150">
-                            Save
+                        <button
+                            @click="validate()"
+                            class="btn btn-lg btn-info elevated w-150 bold">
+                            <span v-show="!isLoading">Save Category</span>
+                            <span v-show="isLoading">Saving...</span>
                         </button>
                     </div>
                 </form>
@@ -58,14 +69,18 @@
 <script>
 import modalMixins from '@/mixins/modal'
 import coloursMixins from '../mixins'
+import subsComponent from '../subs'
 
 export default {
     name: 'newCategoryModal',
     mixins: [modalMixins, coloursMixins],
+    components: { subsComponent },
 
     data: () => ({
         category: {},
-        colour: '#1abc9c'
+        colour: '#1abc9c',
+        subcategories: [],
+        isLoading: false
     }),
 
     mounted () {
@@ -75,13 +90,35 @@ export default {
 
     methods: {
         selectColour (c) {
-            console.log('setting colour', c)
             this.colour = c
-            console.log('category', this.colour)
         },
 
-        validate () {
-            console.log('validating new category')
+        async validate () {
+            this.isLoading = true
+            this.category.colour = this.colour
+            this.category.subs = this.subcategories
+
+            try {
+                const response = await this.$api.post('/categories', this.category)
+                this.$store.dispatch('category/getCategories', this.category)
+                this.category = {}
+                this.subcategories = []
+                this.$alert.success('New category successfully saved')
+            } catch (error) {
+                console.log('error', error)
+                this.$alert.error(error.response.data)
+            }
+            this.isLoading = false
+        },
+
+        pushSub (sub) {
+            this.subcategories.push({ name: sub })
+        },
+
+        removeSub (s) {
+            this.subcategories = this.subcategories.filter(item => {
+                return item !== s
+            })
         }
     }
 }
