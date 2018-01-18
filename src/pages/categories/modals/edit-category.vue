@@ -8,7 +8,7 @@
 
                 <div class="_heading">
                     <i class="ion-ios-pricetag mr-10"></i>
-                    Add Category
+                    Edit Category
                 </div>
             </div>
 
@@ -70,15 +70,26 @@
 import modalMixins from '@/mixins/modal'
 import coloursMixins from '../mixins'
 import subsComponent from '../subs'
+import _ from 'lodash'
 
 export default {
-    name: 'newCategoryModal',
+    name: 'editCategoryModal',
     mixins: [modalMixins, coloursMixins],
     components: { subsComponent },
+    props: ['editing'],
 
     mounted () {
-        window.eventBus.$on('newCategoryModal:open', () => this.open())
-        window.eventBus.$on('newCategoryModal:close', () => this.close())
+        window.eventBus.$on('editCategoryModal:open', () => this.open())
+        window.eventBus.$on('editCategoryModal:close', () => this.close())
+    },
+
+    watch: {
+        editing (val) {
+            if (!_.isEmpty(val)) {
+                this.category = Object.assign({}, val)
+                this.subcategories = val.subs
+            }
+        }
     },
 
     methods: {
