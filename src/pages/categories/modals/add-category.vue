@@ -93,6 +93,7 @@ export default {
                 this.category = {}
                 this.subcategories = []
                 this.$alert.success('New category successfully saved')
+                this.close()
             } catch (error) {
                 console.log('error', error)
                 this.$alert.error(error.response.data)

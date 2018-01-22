@@ -30,6 +30,30 @@ export default {
             } catch (error) {
                 console.log('Error', error)
             }
+        },
+
+        updateCategory ({ commit, state }, payload) {
+            let categories = state.categories.slice()
+
+            for (let c in categories) {
+                if (categories[c]._id === payload._id) {
+                    categories[c] = payload
+                }
+            }
+
+            commit('SET_CATEGORIES', categories)
+        },
+
+        pushSub ({ commit, state }, payload) {
+            let categories = state.categories.slice()
+
+            for (let c in categories) {
+                if (categories[c]._id === payload.category) {
+                    categories[c].subs.push(payload)
+                }
+            }
+
+            commit('SET_CATEGORIES', categories)
         }
     }
 }

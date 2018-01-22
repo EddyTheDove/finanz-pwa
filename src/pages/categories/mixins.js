@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 export default {
     data: () => ({
         showColours: false,
@@ -22,7 +24,6 @@ export default {
     watch: {
         categories (all) {
             if (all.length) {
-                console.log('filtering colours')
                 this.filterColours()
             }
         }
@@ -30,7 +31,11 @@ export default {
 
     methods: {
         pushSub (sub) {
-            this.subcategories.push({ name: sub })
+            this.subcategories.push(sub)
+        },
+
+        pushSubToStore (sub) {
+            this.$store.dispatch('category/pushSub', sub)
         },
 
         removeSub (s) {
@@ -59,9 +64,11 @@ export default {
             })
 
             // set initial colour
-            this.colour = this.availableColours[0]
-
-            console.log('availableColours', this.availableColours)
+            if (!_.isEmpty(this.editing)) {
+                this.colour = this.editing.colour
+            } else {
+                this.colour = this.availableColours[0]
+            }
         }
     }
 }

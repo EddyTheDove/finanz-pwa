@@ -21,7 +21,7 @@
         </div>
 
         <addCategory></addCategory>
-        <editCategory :editing="editing"></editCategory>
+        <editCategory :editing="editing" @categoryUpdated="categoryUpdated"></editCategory>
         <Footer></Footer>
     </div>
 </template>
@@ -77,6 +77,10 @@ export default {
 
         selectColour (c) {
             this.colour = c
+        },
+
+        categoryUpdated (category) {
+            this.editing = category
         }
     }
 }

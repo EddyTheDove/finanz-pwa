@@ -1,0 +1,69 @@
+._confirm {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 9;
+    background-color: rgba(0,0,0,0.4);
+    transform: translateY(100%);
+    transition: 0.3s;
+    display: table;
+
+    .v-align {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    ._confirm-container {
+        width: 95%;
+        max-width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: white;
+        border-radius: 3px;
+        box-shadow: 3px 6px 8px rgba(0,0,0,0.3);
+    }
+
+    ._confirm-title {
+        text-align: center;
+        padding-top:15px;
+        font-weight: bold;
+        font-size: 20px;
+        color: $color-dark;
+    }
+
+    ._confirm-message {
+        padding: 10px;
+        font-size: 15px;
+        text-align: left;
+    }
+
+    ._confirm-buttons {
+        margin-top:10px;
+        padding: 0;
+        display: table;
+        border-top:1px solid #eee;
+
+        ._confirm-button {
+            display: table-cell;
+            width: 10%;
+            text-align: center;
+            padding: 10px 0;
+            font-weight: bold;
+            color: $color-primary;
+            cursor: pointer;
+            font-size: 17px;
+
+            &.left {
+                border-right: 1px solid #eee;
+            }
+        }
+    }
+
+
+
+    &.isOpen {
+        transform: translateY(0%);
+    }
+}
