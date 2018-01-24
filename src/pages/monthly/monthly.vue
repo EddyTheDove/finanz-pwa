@@ -21,7 +21,11 @@
             <h2>Loading...</h2>
         </div>
 
-
+        <div class="charts">
+            <div id="chart"></div>
+        </div>
+        <!-- End of chars  -->
+        
         <!-- is not laoding  -->
         <div class="" v-show="!isLoading">
             <div class="moneys">
@@ -49,11 +53,6 @@
                 </div>
             </div>
             <!-- End of moneys  -->
-
-            <div class="charts">
-                <div id="chart"></div>
-            </div>
-            <!-- End of chars  -->
 
             <div class="categories mt-20">
                 <div class="_block shadowed pointer" v-for="c in categories">
