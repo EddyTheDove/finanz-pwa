@@ -1,6 +1,6 @@
 <template lang="html">
-    <div class="_confirm" :class="[{ isOpen: isOpen }]" @click="close()">
-        <div class="_confirm-outside"></div>
+    <div class="_confirm" :class="[{ isOpen: isOpen }]">
+        <div class="_confirm-outside" @click="close()"></div>
 
 
         <div class="v-align">

@@ -5,10 +5,16 @@
     width: 100%;
     height: 100vh;
     z-index: 9;
-    background-color: rgba(0,0,0,0.4);
     transform: translateY(100%);
     transition: 0.3s;
     display: table;
+
+    ._confirm-outside {
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        background-color: rgba(0,0,0,0.2);
+    }
 
     .v-align {
         display: table-cell;
@@ -23,6 +29,7 @@
         background-color: white;
         border-radius: 3px;
         box-shadow: 3px 6px 8px rgba(0,0,0,0.3);
+        position: relative;
     }
 
     ._confirm-title {

@@ -2,18 +2,7 @@
     <div class="page has-menu has-footer home-page">
         <Menu>Monthly Report</Menu>
 
-        <div class="current-month">
-            <span class="month-nav nav-left" @click="previousMonth()">
-                  <i class="ion-ios-arrow-back"></i>
-            </span>
-
-            <span class="month">{{ month }}</span>
-            <!-- <span class="month">December 2017</span> -->
-
-            <span class="month-nav nav-right" @click="nextMonth()">
-                  <i class="ion-ios-arrow-forward"></i>
-            </span>
-        </div>
+        <month @changed="monthChanged"></month>
 
 
         <!-- when loading  -->
@@ -25,7 +14,7 @@
             <div id="chart"></div>
         </div>
         <!-- End of chars  -->
-        
+
         <!-- is not laoding  -->
         <div class="" v-show="!isLoading">
             <div class="moneys">
@@ -75,11 +64,13 @@
 
 <script>
 import statsMixins from './mixins'
+import month from './components/date'
 import _ from 'lodash'
 
 export default {
     name: 'home-page',
     mixins: [statsMixins],
+    components: { month },
 
     data () {
         return {
@@ -94,11 +85,6 @@ export default {
         }
     },
 
-    mounted () {
-        this.getMonth()
-        this.getStats()
-    },
-
     computed: {
         total () {
             return this.income - this.expense
@@ -110,34 +96,16 @@ export default {
             this.isLoading = true
             const today = window.moment(this.month, 'MMMM YYYY').format('YYYY-MM-DD')
             const response = await this.$api.get('/stats/monthly/' + today)
-            this.incomes = response.data.income
-            this.expenses = response.data.expenses
 
-            this.buildIncome()
-            this.buildExpensesAndCategories()
+            if (!_.isEmpty(response.data)) {
+                this.incomes = response.data.income
+                this.expenses = response.data.expenses
+
+                this.buildIncome()
+                this.buildExpensesAndCategories()
+            }
+
             this.isLoading = false
-        },
-
-        getMonth () {
-            this.month = window.moment().format('MMMM YYYY')
-        },
-
-        previousMonth () {
-            if (!this.isLoading) {
-                this.month = window.moment(this.month, 'MMMM YYYY').subtract(1, 'month').format('MMMM YYYY')
-                this.getStats()
-            }
-        },
-
-        nextMonth () {
-            if (!this.isLoading) {
-                let nextMonth = window.moment(this.month, 'MMMM YYYY').add(1, 'month')
-                if (window.moment().isSameOrBefore(nextMonth)) {
-                    return this.$alert.info('You cannot view future dates')
-                }
-
-                this.month = nextMonth.format('MMMM YYYY')
-            }
         },
 
         buildIncome () {
@@ -147,8 +115,15 @@ export default {
             })
         },
 
+        monthChanged (e) {
+            this.month = e
+            this.getStats()
+        },
+
         buildExpensesAndCategories () {
             this.expense = 0
+            this.categories = []
+
             this.expenses.forEach(e => {
                 this.expense += parseFloat(e.amount)
 
