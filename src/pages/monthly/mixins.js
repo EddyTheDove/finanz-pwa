@@ -1,8 +1,23 @@
-
-import c3 from 'c3'
+import Vue from 'vue'
+import VueC3 from 'vue-c3'
 
 export default {
+    data: () => ({
+        handler: new Vue(), // eslint-disable-line
+        init: false
+    }),
+
+    components: { VueC3 },
+
     methods: {
+        destroyPie () {
+            console.log('Destroying')
+            if (this.init) {
+                this.init = false
+                this.handler.$emit('destroy')
+            }
+        },
+
         buildPie () {
             let colours = {}
             let columns = []
@@ -12,26 +27,20 @@ export default {
                 columns.push([c.name, c.amount])
             })
 
-            this.pie = c3.generate({
-                bindto: '#chart',
+            const options = {
                 data: {
                     columns: columns,
                     colors: colours,
-                    type: 'donut',
-                    onclick: function (d, i) { console.log('onclick', d, i) },
-                    onmouseover: function (d, i) { console.log('onmouseover', d, i) },
-                    onmouseout: function (d, i) { console.log('onmouseout', d, i) }
+                    type: 'donut'
                 },
 
                 donut: {
                     title: 'Expenses'
-                    // label: {
-                    //     format: function (value, ratio, id) {
-                    //         return d3.format('$')(value);
-                    //     }
-                    // }
                 }
-            })
+            }
+
+            this.handler.$emit('init', options)
+            this.init = true
         }
     }
 }

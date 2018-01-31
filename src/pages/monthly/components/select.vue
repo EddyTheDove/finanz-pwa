@@ -81,6 +81,7 @@ export default {
             const selected = window.moment(monthYear, 'MMMM YYYY')
 
             if (window.moment().isSameOrBefore(selected)) {
+                this.month = window.moment().format('MMMM')
                 return this.$alert.info('You cannot view future dates')
             }
 

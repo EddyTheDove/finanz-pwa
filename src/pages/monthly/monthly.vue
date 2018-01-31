@@ -7,16 +7,31 @@
 
         <!-- when loading  -->
         <div class="text-center" v-show="isLoading">
-            <h2>Loading...</h2>
+            <h4>Loading...</h4>
         </div>
+        <!-- End of loading  -->
+
+
+        <!-- Nothing to display  -->
+        <div class="text-center" v-show="!hasData">
+            <h4 class="bold mt-20 grey">No data to display</h4>
+            <div style="font-size:150px">
+                <i class="ion-alert-circled greyer"></i>
+            </div>
+        </div>
+        <!-- End of nothing to display  -->
+
 
         <div class="charts">
-            <div id="chart"></div>
+            <!-- <div id="chart"></div> -->
+            <vue-c3 :handler="handler"></vue-c3>
         </div>
-        <!-- End of chars  -->
+        <!-- End of charts  -->
+
+
 
         <!-- is not laoding  -->
-        <div class="" v-show="!isLoading">
+        <div v-show="showData">
             <div class="moneys">
                 <div class="row">
                     <div class="col-xs-3">
@@ -88,31 +103,45 @@ export default {
     computed: {
         total () {
             return this.income - this.expense
+        },
+
+        hasData () {
+            return this.categories.length
+        },
+
+        showData () {
+            if (!this.isLoading && this.hasData) {
+                return true
+            } return false
         }
     },
 
     methods: {
         async getStats () {
             this.isLoading = true
-            const today = window.moment(this.month, 'MMMM YYYY').format('YYYY-MM-DD')
-            const response = await this.$api.get('/stats/monthly/' + today)
+            try {
+                const today = window.moment(this.month, 'MMMM YYYY').format('YYYY-MM-DD')
+                const response = await this.$api.get('/stats/monthly/' + today)
 
-            if (!_.isEmpty(response.data)) {
                 this.incomes = response.data.income
                 this.expenses = response.data.expenses
 
                 this.buildIncome()
                 this.buildExpensesAndCategories()
+            } catch (error) {
+                console.log(error)
             }
-
             this.isLoading = false
         },
 
         buildIncome () {
             this.income = 0
-            this.incomes.forEach(i => {
-                this.income += parseFloat(i.amount)
-            })
+
+            if (this.incomes.length) {
+                this.incomes.forEach(i => {
+                    this.income += parseFloat(i.amount)
+                })
+            }
         },
 
         monthChanged (e) {
@@ -123,6 +152,12 @@ export default {
         buildExpensesAndCategories () {
             this.expense = 0
             this.categories = []
+
+            if (this.expenses.length === 0) {
+                this.categories = []
+                this.destroyPie()
+                return
+            }
 
             this.expenses.forEach(e => {
                 this.expense += parseFloat(e.amount)
