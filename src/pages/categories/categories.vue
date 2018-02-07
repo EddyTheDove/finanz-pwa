@@ -37,7 +37,6 @@ export default {
     data: () => ({
         category: {},
         isLoading: false,
-        showColours: false,
         colour: '#1abc9c',
         colours: [],
         editing: {}
