@@ -1,5 +1,7 @@
 <template lang="html">
-    <div class="_block shadowed entry" :class="{expense: isExpense}" @click="expand()">
+    <div class="_block shadowed entry"
+        :class="{expense: isExpense}"
+        @click="expand()">
         <div class="_block-container">
             <div class="row">
                 <div class="col-xs-8">
@@ -61,6 +63,10 @@ export default {
             if (this.isExpense) {
                 this.expanded = !this.expanded
             }
+        },
+
+        log () {
+            console.log('doubled clicked')
         }
     }
 }
