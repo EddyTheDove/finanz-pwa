@@ -22,7 +22,11 @@
 
 
         <div class="entries mt-20">
-            <Entry v-for="e in entries" :entry="e" :key="e.id"></Entry>
+            <Entry v-for="e in entries"
+                :entry="e"
+                :key="e.id"
+                @remove="remove">
+            </Entry>
         </div>
 
         <div class="mt-40 text-center" v-show="nextPage">
@@ -113,6 +117,11 @@ export default {
                 }
                 this.isLoading = false
             }
+        },
+
+        async remove (entry) {
+            console.log('entry to be deleted', entry)
+            this.$store.dispatch('entry/remove', entry)
         }
     }
 }

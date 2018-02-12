@@ -100,6 +100,10 @@ body {
     font-weight: bold;
 }
 
+.transitioned {
+    @include transition(ease 0.3s)
+}
+
 .pointer { cursor: pointer }
 .bold { font-weight: bold }
 .round { border-radius: 500px }
