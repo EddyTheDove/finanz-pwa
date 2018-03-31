@@ -42,13 +42,12 @@
                     <!-- End of sub category -->
 
                     <div class="colours">
-                        <label @click="showColours = !showColours">
+                        <label>
                             <span class="_dot" :style="'margin-top:5px; background-color:' + colour"></span>
                             Change Colour
-                            <i class="ion-arrow-down-b"></i>
                         </label>
 
-                        <ul class="list-inline mt-10" v-show="showColours">
+                        <ul class="list-inline mt-10">
                             <li v-for="c in availableColours"
                                 @click="selectColour(c)"
                                 :style="'background-color:' + c">

@@ -20,6 +20,9 @@
     ._modal-container {
         padding: 10px;
         position: relative;
+        height: 100vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
     }
 
     ._modal-header {

@@ -18,7 +18,7 @@
                 <div class="_form-group">
                     <input type="text"
                         class="_form-input bold"
-                        placeholder="Sub category name"
+                        placeholder="Add a category"
                         v-model="sub">
                 </div>
             </div>

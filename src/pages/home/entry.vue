@@ -61,6 +61,10 @@ export default {
             if (this.isExpense) {
                 this.expanded = !this.expanded
             }
+        },
+
+        log () {
+            console.log('doubled clicked')
         }
     }
 }

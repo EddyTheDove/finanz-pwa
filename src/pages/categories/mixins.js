@@ -2,7 +2,7 @@ import _ from 'lodash'
 
 export default {
     data: () => ({
-        showColours: false,
+        showColours: true,
         category: {},
         colour: '#1abc9c',
         subcategories: [],
@@ -22,10 +22,8 @@ export default {
     },
 
     watch: {
-        categories (all) {
-            if (all.length) {
-                this.filterColours()
-            }
+        categories () {
+            this.filterColours()
         }
     },
 
@@ -62,6 +60,8 @@ export default {
                     this.availableColours.push(c)
                 }
             })
+
+            console.log(this.availableColours)
 
             // set initial colour
             if (!_.isEmpty(this.editing)) {
