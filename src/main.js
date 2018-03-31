@@ -6,6 +6,7 @@ import router from './router'
 import store from './store'
 import VueFlatpickr from 'vue-flatpickr-component'
 import VeeValidate from 'vee-validate'
+import Vue2TouchEvents from 'vue2-touch-events'
 
 // eslint-disable-next-line
 import tz from 'moment-timezone'
@@ -29,6 +30,7 @@ window.timezone = window.moment.tz.guess()
 // import filters globally
 require('./filters')
 
+Vue.use(Vue2TouchEvents)
 Vue.use(VeeValidate)
 Vue.use(alert)
 Vue.use(helpr)

@@ -1,8 +1,12 @@
 <template lang="html">
-    <div class="entry" :class="{expense: isExpense}" @click="expand()">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-8">
+    <div class="entry"
+        :class="{expense: isExpense}">
+        <div class="container" v-touch:swipe="swipeHandler">
+
+            <div class="row transitioned"
+                @click="expand()"
+                v-show="swiped == 'right'">
+                <div class="col-xs-8" >
                     <div class="category" v-if="hasCategory">{{ entry.category.name }}</div>
                     <div class="description bold" v-if="!hasCategory">{{ entry.description }}</div>
                     <div class="date">{{ date }}</div>
@@ -15,9 +19,22 @@
                     </div>
                 </div>
             </div>
+
+
+            <!-- Show on swipe  -->
+            <div class="text-center transitioned" v-show="swiped == 'left'">
+                <button class="btn btn-grey btn-lg" @click="swiped = 'right'">
+                    CANCEL
+                </button>
+
+                <button class="btn btn-red btn-lg" @click="remove()">
+                    DELETE
+                </button>
+            </div>
+            <!-- End of swipe actions  -->
         </div>
 
-        <div class="expanded" v-show="expanded">
+        <div class="expanded" v-show="expanded && swiped == 'right'">
             <div class="sub" v-if="suber">{{ suber.name }}</div>
             <div class="description">{{ entry.description }}</div>
         </div>
@@ -33,7 +50,8 @@ export default {
 
     data () {
         return {
-            expanded: false
+            expanded: false,
+            swiped: 'right'
         }
     },
 
@@ -63,8 +81,12 @@ export default {
             }
         },
 
-        log () {
-            console.log('doubled clicked')
+        swipeHandler (e) {
+            this.swiped = e
+        },
+
+        remove () {
+            this.$emit('remove', this.entry)
         }
     }
 }

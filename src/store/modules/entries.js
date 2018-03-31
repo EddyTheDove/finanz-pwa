@@ -26,6 +26,16 @@ export default {
             } catch (error) {
                 console.log('Error', error)
             }
+        },
+
+        async remove ({ commit, state }, entry) {
+            try {
+                const entries = state.entries.filter(e => e._id !== entry._id)
+                commit(types.SET_ENTRIES, entries)
+                ApiService.delete('/entries/' + entry._id)
+            } catch (e) {
+                console.log('Error in entry module dispatch', e)
+            }
         }
     }
 }
