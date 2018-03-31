@@ -1,6 +1,6 @@
 <template lang="html">
-    <div class="_block shadowed entry" :class="{expense: isExpense}" @click="expand()">
-        <div class="_block-container">
+    <div class="entry" :class="{expense: isExpense}" @click="expand()">
+        <div class="container">
             <div class="row">
                 <div class="col-xs-8">
                     <div class="category" v-if="hasCategory">{{ entry.category.name }}</div>

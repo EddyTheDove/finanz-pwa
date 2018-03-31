@@ -2,23 +2,26 @@
     <div class="page has-menu has-footer home-page">
         <Menu>Finanz</Menu>
 
-        <div class="moneys">
-            <div class="row">
-                <div class="col-xs-4">
-                    <div class="medium text-right">
-                        <h4 class="green">{{ income | currency }}</h4>
-                        <h4 class="red">-{{ expenses | currency }}</h4>
+        <div class="container">
+            <div class="moneys">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="medium text-right">
+                            <h4 class="green">{{ income | currency }}</h4>
+                            <h4 class="red">-{{ expenses | currency }}</h4>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-xs-8">
-                    <div class="large text-right">
-                        <h5>Balance</h5>
-                        <h3 class="no-margin">{{ total | currency }}</h3>
+                    <div class="col-xs-8">
+                        <div class="large text-right">
+                            <h5>Balance</h5>
+                            <h3 class="no-margin">{{ total | currency }}</h3>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
 
 
         <div class="entries mt-20">

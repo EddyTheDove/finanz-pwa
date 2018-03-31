@@ -1,7 +1,7 @@
 
 .home-page {
     width: 100%;
-    padding: 0 20px;
+    padding: 0;
 
 
     .current-month {
@@ -58,6 +58,8 @@
     .moneys {
         text-align: center;
         margin-top: 10px;
+        position: relative;
+        width: 100%;
 
         h5 {
             color: $color-teal;
@@ -88,6 +90,9 @@
             cursor: pointer;
             font-family: 'Source Sans Pro', sans-serif;
             font-size: 16px;
+            background-color: white;
+            border-bottom: 1px solid #f1f1f1;
+            padding: 5px 10px;
 
             .category {
                 font-weight: 600;
