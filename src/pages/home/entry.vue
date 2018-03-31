@@ -1,7 +1,7 @@
 <template lang="html">
     <div class="entry"
         :class="{expense: isExpense}">
-        <div class="container" v-touch:swipe="swipeHandler">
+        <div class="container">
 
             <div class="row transitioned"
                 @click="expand()"

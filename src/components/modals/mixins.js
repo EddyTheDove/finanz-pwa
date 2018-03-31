@@ -17,6 +17,7 @@ export default {
 
     mounted () {
         this.resetGhost()
+        this.ghost.date = window.moment().tz(window.timezone).format('YYYY-MM-DD')
     },
 
     computed: {
@@ -43,7 +44,6 @@ export default {
 
         resetGhost () {
             this.ghost = {
-                date: window.moment().tz(window.timezone).format('YYYY-MM-DD'),
                 category: '',
                 sub: '',
                 amount: '',

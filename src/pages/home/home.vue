@@ -46,10 +46,12 @@
 </template>
 
 <script>
+import Longpress from 'vue-longpress'
 import Entry from './entry'
+
 export default {
     name: 'home-page',
-    components: { Entry },
+    components: { Entry, Longpress },
 
     data () {
         return {
