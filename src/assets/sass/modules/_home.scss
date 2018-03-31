@@ -121,10 +121,22 @@
                 text-align: right;
                 font-family: Gudea, sans-serif;
                 font-size: 15px;
+
+                i {
+                    color: $color-teal;
+                    font-size: 20px;
+                    margin-top: -3px;
+                    margin-left: 5px;
+                    float: right;
+                }
             }
 
             &.expense {
                 .amount { color: $color-red }
+            }
+
+            .entry-options {
+                padding-bottom: 10px;
             }
         }
     }

@@ -1,40 +1,39 @@
 <template lang="html">
     <div class="entry"
-        :class="{expense: isExpense}">
+        :class="{ expense: isExpense }">
         <div class="container">
 
             <div class="row transitioned"
-                @click="expand()"
-                v-show="swiped == 'right'">
-                <div class="col-xs-8" >
-                    <div class="category" v-if="hasCategory">{{ entry.category.name }}</div>
+                v-show="!toggled">
+                <div class="col-xs-8" @click="expand()">
+                    <div class="category" v-if="hasCategory" >{{ entry.category.name }}</div>
                     <div class="description bold" v-if="!hasCategory">{{ entry.description }}</div>
                     <div class="date">{{ date }}</div>
 
                 </div>
 
                 <div class="col-xs-4">
-                    <div class="amount">
+                    <div class="amount" @click="toggle()">
                         {{ entry.amount | currency }}
+                        <i class="ion-android-more-vertical"></i>
                     </div>
                 </div>
             </div>
 
 
             <!-- Show on swipe  -->
-            <div class="text-center transitioned" v-show="swiped == 'left'">
-                <button class="btn btn-grey btn-lg" @click="swiped = 'right'">
-                    CANCEL
-                </button>
-
-                <button class="btn btn-red btn-lg" @click="remove()">
+            <div class="entry-options" v-show="toggled">
+                <button class="btn btn-red" @click="remove()">
                     DELETE
+                </button>
+                <button class="btn btn-grey" @click="toggled = false">
+                    CANCEL
                 </button>
             </div>
             <!-- End of swipe actions  -->
         </div>
 
-        <div class="expanded" v-show="expanded && swiped == 'right'">
+        <div class="expanded" v-show="expanded && !toggled">
             <div class="sub" v-if="suber">{{ suber.name }}</div>
             <div class="description">{{ entry.description }}</div>
         </div>
@@ -51,7 +50,7 @@ export default {
     data () {
         return {
             expanded: false,
-            swiped: 'right'
+            toggled: false
         }
     },
 
@@ -81,11 +80,12 @@ export default {
             }
         },
 
-        swipeHandler (e) {
-            this.swiped = e
+        toggle () {
+            this.toggled = !this.toggled
         },
 
         remove () {
+            this.toggled = false
             this.$emit('remove', this.entry)
         }
     }

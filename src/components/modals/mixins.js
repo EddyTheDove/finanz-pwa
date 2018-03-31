@@ -18,6 +18,8 @@ export default {
     mounted () {
         this.resetGhost()
         this.ghost.date = window.moment().tz(window.timezone).format('YYYY-MM-DD')
+        this.ghost.category = ''
+        this.ghost.sub = ''
     },
 
     computed: {
@@ -43,12 +45,8 @@ export default {
         },
 
         resetGhost () {
-            this.ghost = {
-                category: '',
-                sub: '',
-                amount: '',
-                description: ''
-            }
+            this.ghost.amount = ''
+            this.ghost.description = ''
         }
     }
 }
