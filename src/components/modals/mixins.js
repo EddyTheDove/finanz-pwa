@@ -3,7 +3,9 @@ import tz from 'moment-timezone'
 
 export default {
     data: () => ({
-        ghost: {},
+        ghost: {
+            category: ''
+        },
         flatpickrOptions: {
             wrap: true, // set wrap to true only when using 'input-group'
             altFormat: 'j M Y',

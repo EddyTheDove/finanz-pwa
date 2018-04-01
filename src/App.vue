@@ -34,6 +34,7 @@ export default {
     mounted () {
         if (this.token) {
             this.$store.dispatch('user/getUser')
+            this.$store.dispatch('user/getBalance')
             this.$store.dispatch('category/getCategories')
         }
     }

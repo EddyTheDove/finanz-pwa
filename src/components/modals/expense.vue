@@ -95,6 +95,7 @@ export default {
 
     watch: {
         'ghost.category': function (val) {
+            console.log(val)
             this.ghost.sub = ''
 
             if (val === '') {

@@ -6,19 +6,30 @@
             <div class="moneys">
                 <div class="row">
                     <div class="col-xs-4">
-                        <div class="medium text-right">
-                            <h4 class="green">{{ income | currency }}</h4>
-                            <h4 class="red">-{{ expenses | currency }}</h4>
+                        <div class="medium text-left">
+                            <h5>Income</h5>
+                            <h4>{{ balance.incomes }}</h4>
                         </div>
                     </div>
 
-                    <div class="col-xs-8">
-                        <div class="large text-right">
-                            <h5>Balance</h5>
-                            <h3 class="no-margin">{{ total | currency }}</h3>
+                    <div class="col-xs-4">
+                        <div class="balance">
+                            <div class="large">
+                                <h5>Balance</h5>
+                                <h3 class="no-margin">{{ balance.total }}</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <div class="medium text-right">
+                            <h5>Expenses</h5>
+                            <h4 class="red">{{ balance.expenses }}</h4>
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
 
@@ -46,6 +57,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Longpress from 'vue-longpress'
 import Entry from './entry'
 
@@ -65,10 +77,6 @@ export default {
     },
 
     computed: {
-        user () {
-            return this.$store.state.user.user
-        },
-
         income () {
             return this.user.income || 0
         },
@@ -81,13 +89,8 @@ export default {
             return this.income - this.expenses
         },
 
-        entries () {
-            return this.$store.state.entry.entries
-        },
-
-        nextPage () {
-            return this.$store.state.entry.nextPage
-        }
+        ...mapState('entry', ['entries', 'nextPage']),
+        ...mapState('user', ['user', 'balance'])
     },
 
     methods: {

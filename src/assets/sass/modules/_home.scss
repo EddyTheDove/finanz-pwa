@@ -81,6 +81,16 @@
             font-weight: bold;
             color: $color-primary;
         }
+
+        .balance {
+            margin-top: 35px;
+
+            h5 {
+                font-weight: bold;
+                font-size: 15px;
+                color: $color-dark;
+            }
+        }
     },
 
     .entries {
