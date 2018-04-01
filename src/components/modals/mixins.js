@@ -36,6 +36,7 @@ export default {
             try {
                 await this.$api.post('/entries', this.ghost)
                 this.$store.dispatch('user/getUser')
+                this.$store.dispatch('user/getBalance')
                 this.$store.dispatch('entry/getEntries')
                 this.showMessage()
                 this.resetGhost()
