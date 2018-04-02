@@ -8,7 +8,7 @@
                     <div class="col-xs-4">
                         <div class="medium text-left">
                             <h5>Income</h5>
-                            <h4>{{ balance.incomes }}</h4>
+                            <h4>{{ balance.incomes | currency }}</h4>
                         </div>
                     </div>
 
@@ -16,7 +16,7 @@
                         <div class="balance">
                             <div class="large">
                                 <h5>Balance</h5>
-                                <h3 class="no-margin">{{ balance.total }}</h3>
+                                <h3 class="no-margin">{{ balance.total | currency }}</h3>
                             </div>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
                     <div class="col-xs-4">
                         <div class="medium text-right">
                             <h5>Expenses</h5>
-                            <h4 class="red">{{ balance.expenses }}</h4>
+                            <h4 class="red">{{ balance.expenses | currency }}</h4>
                         </div>
                     </div>
                 </div>

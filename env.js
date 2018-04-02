@@ -1,5 +1,5 @@
 export default {
-    BASEURL: 'http://localhost:3001/v1',
-    // BASEURL: 'http://api.izyfinance.com',
+    // BASEURL: 'http://localhost:3001/v1',
+    BASEURL: 'http://api.izyfinance.com:8888/v1',
     TOKEN: '_finanz-vnQpr8msYy'
 }
