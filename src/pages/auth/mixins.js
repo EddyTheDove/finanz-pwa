@@ -34,6 +34,7 @@ export default {
             this.$store.commit('user/SET_USER', user)
             AuthService.setToken(user.token)
             this.$api.setHeaders(user.token)
+            this.$store.dispatch('user/getBalance')
             this.$store.dispatch('category/getCategories')
             this.$router.push('/')
         }
