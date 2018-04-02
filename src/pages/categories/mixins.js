@@ -30,6 +30,7 @@ export default {
     methods: {
         pushSub (sub) {
             this.subcategories.push(sub)
+            this.pushSubToStore(sub)
         },
 
         pushSubToStore (sub) {
@@ -60,8 +61,6 @@ export default {
                     this.availableColours.push(c)
                 }
             })
-
-            console.log(this.availableColours)
 
             // set initial colour
             if (!_.isEmpty(this.editing)) {

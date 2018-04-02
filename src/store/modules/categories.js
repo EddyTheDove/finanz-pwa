@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import * as types from '../types'
 import ApiService from '../../services/api'
 
@@ -45,7 +46,7 @@ export default {
         },
 
         pushSub ({ commit, state }, payload) {
-            let categories = state.categories.slice()
+            let categories = _.cloneDeep(state.categories)
 
             for (let c in categories) {
                 if (categories[c]._id === payload.category) {
